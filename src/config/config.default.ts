@@ -25,6 +25,20 @@ export default {
     },
   },
   redis: getRedisConfig(parseInt(process.env.REDIS_DB, 10)),
+  bullmq: {
+    defaultQueueOptions: {
+      defaultJobOptions: {
+        removeOnComplete: 3, // 成功后只保留最近 3 条记录
+        removeOnFail: 10, // 失败后只保留最近 10 条记录
+      },
+    },
+    defaultConnection: {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+    },
+    // 可选，队列前缀
+    defaultPrefix: 'midway-bullmq',
+  },
   mongoose: {
     dataSource: {
       default: {

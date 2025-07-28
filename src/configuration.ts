@@ -3,6 +3,7 @@ import './init';
 import { hostname } from 'os';
 import path, { join } from 'path';
 
+import * as bullmq from '@midwayjs/bullmq';
 import {
   App,
   Config,
@@ -16,7 +17,6 @@ import * as i18n from '@midwayjs/i18n';
 import * as koa from '@midwayjs/koa';
 import { IMidwayLogger } from '@midwayjs/logger';
 import * as mongoose from '@midwayjs/mongoose';
-import * as redis from '@midwayjs/redis';
 import * as validate from '@midwayjs/validate';
 import { sync } from 'read-pkg';
 
@@ -27,12 +27,13 @@ import { RUNTIME_ENV_MAP, ServerEnv } from './types/config/config.dto';
 import { validateBy } from './utils/common';
 import { CloudwatchTransport } from './utils/logger';
 import { registerModel } from './utils/register-model';
+
 @Configuration({
   imports: [
     koa,
     validate,
     i18n,
-    redis,
+    bullmq,
     mongoose,
     {
       component: crossDomain,
