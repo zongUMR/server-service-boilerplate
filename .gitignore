@@ -24,3 +24,4 @@ _dist/
 
 .yarn/cache
 .config*.json
+dump.rdb

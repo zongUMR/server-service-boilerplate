@@ -9,11 +9,16 @@ export const OPENOCEAN_SUPPORTED_CHAINS: Array<ChainItemInterface> = [
     id: '1',
     address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
   },
-
   {
     name: 'BNB Chain',
     code: 'bsc',
     id: '56',
+    address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+  },
+  {
+    name: 'Base',
+    code: 'base',
+    id: '8453',
     address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
   },
 ];

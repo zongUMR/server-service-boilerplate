@@ -1,6 +1,10 @@
 import { Inject, Provide } from '@midwayjs/core';
 
-import { Provider, TokenItemInterface } from '../../types/swap.type';
+import {
+  Provider,
+  TokenItemInterface,
+  TokenItemWithSupportedProviderInterface,
+} from '../../types/swap.type';
 import { TokenModel } from '../swap/swap.entity';
 
 @Provide()
@@ -8,6 +12,27 @@ export class DbService {
   @Inject('TokenSchema')
   tokenModel: typeof TokenModel;
 
+  async getTokenByChainIdAndAddress(
+    chainId: string,
+    address: string
+  ): Promise<TokenItemWithSupportedProviderInterface | null> {
+    const token = await this.tokenModel.findOne({
+      chainId,
+      address,
+    });
+    if (token) {
+      return {
+        id: token.id,
+        logo: token.logo,
+        address: token.address,
+        symbol: token.symbol,
+        decimals: token.decimals,
+        name: token.name,
+        supportedProviders: token.supportedProviders,
+      };
+    }
+    return null;
+  }
   async getTokensByChainId(
     chainId: string,
     tokenName?: string
