@@ -3,6 +3,7 @@ import { Provide } from '@midwayjs/core';
 import {
   GasPriceItem,
   QuoteItemInterface,
+  SwapItemInterface,
   TokenItemInterface,
 } from '../../types/swap.type';
 
@@ -153,5 +154,37 @@ export class OpenOceanService extends BaseProvider implements BaseProvider {
         return item.value;
       }
     });
+  }
+
+  async getSwap(
+    chainId: string,
+    inTokenAddress: string,
+    outTokenAddress: string,
+    inAmount: string,
+    slippage: string,
+    account: string,
+    gasPrice: string
+  ): Promise<SwapItemInterface> {
+    const data = await fetch(
+      `${this.baseUrl}/${chainId}/swap?inTokenAddress=${inTokenAddress}&outTokenAddress=${outTokenAddress}&amountDecimals=${inAmount}&slippage=${slippage}&account=${account}&gasPriceDecimals=${gasPrice}`,
+      {
+        method: 'GET',
+      }
+    ).then(res => res.json());
+
+    return {
+      inAmount: data.data.inAmount,
+      outAmount: data.data.outAmount,
+      estimatedGas: data.data.estimatedGas,
+      minOutAmount: data.data.minOutAmount,
+      from: data.data.from,
+      to: data.data.to,
+      data: data.data.data,
+      chainId,
+      inToken: data.data.inToken,
+      outToken: data.data.outToken,
+      price_impact: data.data.priceImpact,
+      gasPrice: data.data.gasPrice.toString(),
+    };
   }
 }

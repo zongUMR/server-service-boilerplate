@@ -2,6 +2,7 @@ import {
   GasPriceItem,
   Provider,
   QuoteItemInterface,
+  SwapItemInterface,
   TokenItemInterface,
 } from '../../types/swap.type';
 
@@ -41,4 +42,15 @@ export abstract class BaseProvider {
 
   // Method to get the gas prices for a specific chain ID, only to be implemented by subclasses
   abstract getGasPrice(chainId: string): Promise<GasPriceItem>;
+
+  // Method to get the quote swap information for building a real swap transaction on chain
+  abstract getSwap(
+    chainId: string,
+    inTokenAddress: string,
+    outTokenAddress: string,
+    inAmount: string,
+    slippage: string,
+    account: string,
+    gasPrice: string
+  ): Promise<SwapItemInterface>;
 }

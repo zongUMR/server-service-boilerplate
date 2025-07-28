@@ -48,3 +48,18 @@ export interface GasPriceItem {
     waitTimeEstimate?: number;
   };
 }
+
+export interface SwapItemInterface {
+  inAmount: string;
+  outAmount: string;
+  estimatedGas: string;
+  minOutAmount: string;
+  from: string;
+  to: string;
+  data: string;
+  chainId: string;
+  inToken: any;
+  outToken: any;
+  price_impact: string;
+  gasPrice: string;
+}

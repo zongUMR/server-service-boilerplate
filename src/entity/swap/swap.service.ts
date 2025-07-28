@@ -5,6 +5,7 @@ import { DbService } from '../common/db.service';
 import {
   Provider,
   QuoteItemInterface,
+  SwapItemInterface,
   TokenItemInterface,
 } from '../../types/swap.type';
 import { OpenOceanService } from '../providers/openocean.service';
@@ -116,5 +117,43 @@ export class SwapService {
       )
     );
     return data;
+  }
+  /**
+   * Get the swap transaction details for a specific chain and token pair
+   * @param chainId The ID of the chain
+   * @param inTokenAddress The address of the input token
+   * @param outTokenAddress The address of the output token
+   * @param inAmount The amount of the input token
+   * @param slippage The slippage percentage for the swap
+   * @param account The account address to perform the swap
+   * @param gasPrice The gas price to use for the swap
+   * @param provider The provider to use for the swap
+   * @return The swap item interface containing the swap details
+   * @throws Error if the provider is not supported
+   */
+  async getSwap(
+    chainId: string,
+    inTokenAddress: string,
+    outTokenAddress: string,
+    inAmount: string,
+    slippage: string,
+    account: string,
+    gasPrice: string,
+    provider: Provider
+  ): Promise<SwapItemInterface> {
+    switch (provider) {
+      case 'openOcean':
+        return this.openOceanService.getSwap(
+          chainId,
+          inTokenAddress,
+          outTokenAddress,
+          inAmount,
+          slippage,
+          account,
+          gasPrice
+        );
+      default:
+        throw new Error(`Provider ${provider} not supported`);
+    }
   }
 }

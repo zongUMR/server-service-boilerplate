@@ -1,12 +1,15 @@
 import { Controller, Get, Inject, Param, Query } from '@midwayjs/core';
 
 import { OPENOCEAN_SUPPORTED_CHAINS } from '../../constant';
-import { SwapService } from './swap.service';
 import {
   ChainItemInterface,
+  Provider,
   QuoteItemInterface,
+  SwapItemInterface,
   TokenItemInterface,
 } from '../../types/swap.type';
+
+import { SwapService } from './swap.service';
 
 @Controller('/swap')
 export class SwapController {
@@ -42,6 +45,29 @@ export class SwapController {
       outTokenAddress,
       amount,
       slippage
+    );
+  }
+
+  @Get('/:chainId/swap')
+  async getSwap(
+    @Param('chainId') chainId: string,
+    @Query('inTokenAddress') inTokenAddress: string,
+    @Query('outTokenAddress') outTokenAddress: string,
+    @Query('inAmount') inAmount: string,
+    @Query('slippage') slippage: string,
+    @Query('account') account: string,
+    @Query('gasPrice') gasPrice: string,
+    @Query('provider') provider: Provider
+  ): Promise<SwapItemInterface> {
+    return this.swapService.getSwap(
+      chainId,
+      inTokenAddress,
+      outTokenAddress,
+      inAmount,
+      slippage,
+      account,
+      gasPrice,
+      provider
     );
   }
 }
