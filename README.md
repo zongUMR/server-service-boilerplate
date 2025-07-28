@@ -12,17 +12,17 @@
 ### Swap feature
 1. `constants: swap.constants.ts` - Contains constants related to the swap feature.
 2. `Entity`:
-  1. `common: db.service.ts`: The mongodb operations service
-  2. `providers`: the provider for swap operations
-    - `base.provider.ts`: The base provider class for swap operations, it only contains the common methods signature, all other providers should implement this class.
-    - `openocean.provider.ts`: The [openocean](https://apis.openocean.finance/developer/apis/swap-api/api-v4) provider for swap operations.
-  3. `swap`: Contains the swap entity, controller, and service.
-    - `swap.controller.ts`: The controller for swap operations.
-    - `swap.service.ts`: The service for swap operations, it contains the business logic for swap operations.
-    - `swap.entity.ts`: The entity for swap operations, it defines the mongodb schema for swap operations.
-3. `Scheduler`: Contains the scheduler for swap operations.
-  - `swap.scheduler.ts`: The scheduler for swap operations, it contains the logic to schedule **token list** refresh from the providers and chains everyday
-4. `types: swap.types.ts`: Contains the types related to the swap feature
+    1. `common: db.service.ts`: The mongodb operations service
+    2. `providers`: the provider for swap operations
+        - `base.provider.ts`: The base provider class for swap operations, it only contains the common methods signature, all other providers should implement this class.
+        - `openocean.provider.ts`: The [openocean](https://apis.openocean.finance/developer/apis/swap-api/api-v4) provider for swap operations.
+3. `swap`: Contains the swap entity, controller, and service.
+      - `swap.controller.ts`: The controller for swap operations.
+      - `swap.service.ts`: The service for swap operations, it contains the business logic for swap operations.
+      - `swap.entity.ts`: The entity for swap operations, it defines the mongodb schema for swap operations.
+4. `Scheduler`: Contains the scheduler for swap operations.
+    - `swap.scheduler.ts`: The scheduler for swap operations, it contains the logic to schedule **token list** refresh from the providers and chains everyday
+5. `types: swap.types.ts`: Contains the types related to the swap feature
 
 ### Swap API
 Defined in `entity/swap/swap.controller.ts`, the API endpoints for swap operations are as follows:
